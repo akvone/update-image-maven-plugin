@@ -5,7 +5,7 @@
   <groupId>com.akvone</groupId>
   <artifactId>update-image-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
-  <version>0.1.1-SNAPSHOT</version>
+  <version>0.5.2-SNAPSHOT</version>
   <name>Update image in cloud Maven Plugin</name>
 
   <licenses>
@@ -24,7 +24,7 @@
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-plugin-api</artifactId>
-      <version>3.6.0</version>
+      <version>3.6.1</version>
     </dependency>
     <!-- dependencies to annotations -->
     <dependency>

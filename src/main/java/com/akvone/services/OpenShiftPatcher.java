@@ -1,13 +1,14 @@
 package com.akvone.services;
 
-import com.akvone.properties.OpenShiftProperties;
+import static java.lang.String.format;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.akvone.properties.OpenShiftProperties;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.TrustAllStrategy;
@@ -16,18 +17,26 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
+import org.apache.maven.plugin.logging.Log;
 
 public class OpenShiftPatcher {
 
+  private static final String SUCCESSFUL_RESULT_URL = "%s/console/project/%s/browse/dc/%s";
+  private static final String EDIT_DEPLOYMENT_MANUALLY_PATTERN = "%s/console/project/%s/edit/dc/%s";
   private static final String OPENSHIFT_DEPLOYMENT_URL_PATTERN = "%s/oapi/v1/namespaces/%s/deploymentconfigs/%s";
-  private static final String OPENSHIFT_PODS_BY_NAMESPACE_URL = "/api/v1/namespaces/%s/pods";
 
+  private final Log log;
   private final OpenShiftProperties props;
   private final String patchFullUrl;
+  private final String editDeploymentManuallyUrl;
+  private final String successfulResultUrl;
 
-  public OpenShiftPatcher(OpenShiftProperties props) {
+  public OpenShiftPatcher(Log log, OpenShiftProperties props) {
+    this.log = log;
     this.props = props;
-    patchFullUrl = String.format(OPENSHIFT_DEPLOYMENT_URL_PATTERN, props.serverUrl, props.namespace, props.appName);
+    patchFullUrl = format(OPENSHIFT_DEPLOYMENT_URL_PATTERN, props.serverUrl, props.namespace, props.appName);
+    editDeploymentManuallyUrl = format(EDIT_DEPLOYMENT_MANUALLY_PATTERN, props.serverUrl, props.namespace, props.appName);
+    successfulResultUrl = format(SUCCESSFUL_RESULT_URL, props.serverUrl, props.namespace, props.appName);
   }
 
   public void patchOpenShiftDeployment(String newImagePath) {
@@ -40,9 +49,16 @@ public class OpenShiftPatcher {
       HttpPatch httpPatch = buildHttpPatch(newImagePath);
 
       CloseableHttpResponse response = httpclient.execute(httpPatch);
-      System.out.println("Status code " + response.getStatusLine().getStatusCode());
+      int statusCode = response.getStatusLine().getStatusCode();
+      log.info("Status code " + statusCode);
+      if (statusCode >= 400) {
+        throw new IllegalStateException("TODO"); // TODO: throw another suitable exception
+      }
+      log.info("See result here: " + successfulResultUrl);
     } catch (Exception e) {
-      e.printStackTrace();
+      log.warn("Tried to update but has no success. Please update it manually:");
+      log.warn("Image location: " + newImagePath);
+      log.warn("Update here: " + editDeploymentManuallyUrl);
     }
   }
 
@@ -70,11 +86,4 @@ public class OpenShiftPatcher {
     return objectMapper.writeValueAsString(object);
   }
 
-  private String getLatestPod(String appName, OpenShiftProperties props) {
-    String url = String.format(OPENSHIFT_PODS_BY_NAMESPACE_URL, props.namespace);
-    HttpGet httpGet = new HttpGet(url);
-    //TODO
-
-    return null;
-  }
 }

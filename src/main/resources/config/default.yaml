@@ -1,0 +1,12 @@
+docker:
+  host: "tcp://127.0.0.1:2375"
+  username: "***"
+  authorization: "***"
+artifactory:
+  url: "***"
+  repository: "***"
+cloudProvider:
+  type: "openshift"
+  url: "***"
+  namespace: "***"
+  authorizationToken: "***" # get it from openshift (Bearer token)
