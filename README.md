@@ -1,3 +1,5 @@
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.akvone/update-image-maven-plugin)](https://search.maven.org/artifact/com.github.akvone/update-image-maven-plugin)
+
 # Update image Maven plugin
 
 ## How to use 
