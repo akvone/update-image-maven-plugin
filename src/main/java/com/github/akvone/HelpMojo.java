@@ -1,14 +1,14 @@
-package com.akvone;
+package com.github.akvone;
 
-import com.akvone.core.AbstractMojoForRoot;
+import com.github.akvone.core.AbstractMojoForRoot;
 import org.apache.maven.plugins.annotations.Mojo;
 
 @Mojo(name = "help")
 public class HelpMojo extends AbstractMojoForRoot {
 
-  private static final String FULL_COMMAND = "mvn clean package -DskipTests com.akvone:update-image-maven-plugin:update";
-  private static final String REDUCED_UPDATE_COMMAND = "mvn com.akvone:update-image-maven-plugin:update";
-  private static final String REDUCED_BUILD_PUSH_COMMAND = "mvn com.akvone:update-image-maven-plugin:build-push";
+  private static final String FULL_COMMAND = "mvn clean package -DskipTests com.github.akvone:update-image-maven-plugin:update";
+  private static final String REDUCED_UPDATE_COMMAND = "mvn com.github.akvone:update-image-maven-plugin:update";
+  private static final String REDUCED_BUILD_PUSH_COMMAND = "mvn com.github.akvone:update-image-maven-plugin:build-push";
 
   @Override
   public void executeOnRoot() {

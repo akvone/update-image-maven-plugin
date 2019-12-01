@@ -1,4 +1,4 @@
-package com.akvone.properties;
+package com.github.akvone.properties;
 
 import static org.junit.Assert.assertEquals;
 

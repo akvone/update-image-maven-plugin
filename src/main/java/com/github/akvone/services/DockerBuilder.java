@@ -1,6 +1,6 @@
-package com.akvone.services;
+package com.github.akvone.services;
 
-import com.akvone.properties.PropertiesHolder;
+import com.github.akvone.properties.PropertiesHolder;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.model.BuildResponseItem;
 import com.github.dockerjava.api.model.PushResponseItem;

@@ -1,9 +1,9 @@
-package com.akvone.core;
+package com.github.akvone.core;
 
-import com.akvone.services.DockerBuilder;
-import com.akvone.services.OpenShiftPatcher;
-import com.akvone.properties.OpenShiftProperties;
-import com.akvone.properties.PropertiesHolder;
+import com.github.akvone.services.DockerBuilder;
+import com.github.akvone.services.OpenShiftPatcher;
+import com.github.akvone.properties.OpenShiftProperties;
+import com.github.akvone.properties.PropertiesHolder;
 import java.io.IOException;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.project.MavenProject;

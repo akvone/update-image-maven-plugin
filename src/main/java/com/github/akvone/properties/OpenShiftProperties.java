@@ -1,4 +1,4 @@
-package com.akvone.properties;
+package com.github.akvone.properties;
 
 public class OpenShiftProperties {
 

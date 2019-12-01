@@ -1,4 +1,4 @@
-package com.akvone.core;
+package com.github.akvone.core;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.Parameter;

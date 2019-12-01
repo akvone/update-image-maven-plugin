@@ -3,19 +3,19 @@
 ## How to use 
 ### With maven
 #### What you really need:
-* Type: `mvn clean package -DskipTests com.akvone:update-image-maven-plugin:update` to make full update
+* Type: `mvn clean package -DskipTests com.github.akvone:update-image-maven-plugin:update` to make full update
 
 #### May be useful also 
-* Type: `mvn clean compile jar:jar org.springframework.boot:spring-boot-maven-plugin:repackage com.akvone:update-image-maven-plugin:update` 
+* Type: `mvn clean compile jar:jar org.springframework.boot:spring-boot-maven-plugin:repackage com.github.akvone:update-image-maven-plugin:update` 
   to make full update (fastest command, but works only with Spring Boot projects)
-* Type: `mvn com.akvone:update-image-maven-plugin:update` to make partial update (without generating new jar)
-* Type: `mvn com.akvone:update-image-maven-plugin:build-push` to make build and push (without generating new jar)
+* Type: `mvn com.github.akvone:update-image-maven-plugin:update` to make partial update (without generating new jar)
+* Type: `mvn com.github.akvone:update-image-maven-plugin:build-push` to make build and push (without generating new jar)
 
 ### With Intellij IDEA
 1. Add Configuration
 2. Create Maven Run Configuration:
 3. Command line:
-  `-N com.akvone:update-image-maven-plugin:update`
+  `-N com.github.akvone:update-image-maven-plugin:update`
 4. Before launch 
   `clean package -DskipTests`
   

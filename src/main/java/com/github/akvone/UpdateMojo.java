@@ -1,7 +1,7 @@
-package com.akvone;
+package com.github.akvone;
 
-import com.akvone.core.AbstractMojoForRoot;
-import com.akvone.core.ImageUpdater;
+import com.github.akvone.core.AbstractMojoForRoot;
+import com.github.akvone.core.ImageUpdater;
 import org.apache.maven.plugins.annotations.Mojo;
 
 @Mojo(name = "update")

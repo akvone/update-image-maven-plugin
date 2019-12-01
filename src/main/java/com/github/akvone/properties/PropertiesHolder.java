@@ -1,4 +1,4 @@
-package com.akvone.properties;
+package com.github.akvone.properties;
 
 import java.util.HashMap;
 import org.apache.commons.configuration2.CombinedConfiguration;
