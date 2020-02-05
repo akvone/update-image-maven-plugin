@@ -84,6 +84,11 @@
       <artifactId>docker-java</artifactId>
       <version>${docker-java.version}</version>
     </dependency>
+    <dependency><!--TODO: Remove as soon as docker java supports jdk11-->
+      <groupId>com.sun.activation</groupId>
+      <artifactId>javax.activation</artifactId>
+      <version>1.2.0</version>
+    </dependency>
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
