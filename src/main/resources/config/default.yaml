@@ -1,5 +1,5 @@
 docker:
-  host: "tcp://127.0.0.1:2375"
+  host: "tcp://127.0.0.1:2375" # or "unix:///var/run/docker.sock" for macOS
   username: "***"
   authorization: "***"
 artifactory:
