@@ -1,8 +1,10 @@
 package com.github.akvone;
 
 import com.github.akvone.core.AbstractMojoForRoot;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.maven.plugins.annotations.Mojo;
 
+@Slf4j
 @Mojo(name = "help")
 public class HelpMojo extends AbstractMojoForRoot {
 
@@ -12,12 +14,12 @@ public class HelpMojo extends AbstractMojoForRoot {
 
   @Override
   public void executeOnRoot() {
-    getLog().info("To make it work do next steps:");
-    getLog().info("- Run docker and enable 'Docker without TLS' (Docker -> Settings -> General -> 'Expose daemon on tcp://localhost:2375 without tls')");
-    getLog().info("- Add required properties in '{root}/../config.yaml' or '{root}/gitignore/config.yaml'");
-    getLog().info("---");
-    getLog().info("Type: " + FULL_COMMAND + " to make full update");
-    getLog().info("Type: " + REDUCED_UPDATE_COMMAND + " To make update only (without generating new jar)");
-    getLog().info("Type: " + REDUCED_BUILD_PUSH_COMMAND + " To make build and push only (without generating new jar)");
+    log.info("To make it work do next steps:");
+    log.info("- Run docker and enable 'Docker without TLS' (Docker -> Settings -> General -> 'Expose daemon on tcp://localhost:2375 without tls')");
+    log.info("- Add required properties in '{root}/../config.yaml' or '{root}/gitignore/config.yaml'");
+    log.info("---");
+    log.info("Type: " + FULL_COMMAND + " to make full update");
+    log.info("Type: " + REDUCED_UPDATE_COMMAND + " To make update only (without generating new jar)");
+    log.info("Type: " + REDUCED_BUILD_PUSH_COMMAND + " To make build and push only (without generating new jar)");
   }
 }

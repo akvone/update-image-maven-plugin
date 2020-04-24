@@ -40,7 +40,9 @@
     <maven-plugin-api.version>3.6.1</maven-plugin-api.version>
     <maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
     <maven-project.version>2.2.1</maven-project.version>
+    <!--Helpful-->
     <lombok.version>1.18.12</lombok.version>
+    <slf4j.version>1.7.30</slf4j.version>
     <!--For production-->
     <docker-java.version>3.2.1</docker-java.version>
     <httpclient.version>4.5.9</httpclient.version>
@@ -77,15 +79,24 @@
       <artifactId>maven-project</artifactId>
       <version>${maven-project.version}</version>
     </dependency>
-
+    <!--Helpful-->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
       <scope>provided</scope>
     </dependency>
-
-
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>test</scope>
+    </dependency>
     <!--For business logic-->
     <dependency>
       <groupId>com.github.docker-java</groupId>

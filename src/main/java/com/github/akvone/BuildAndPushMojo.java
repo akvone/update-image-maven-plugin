@@ -8,7 +8,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 public class BuildAndPushMojo extends AbstractMojoForRoot {
 
   public void executeOnRoot() {
-    ImageUpdater imageUpdater = new ImageUpdater(getLog(), project, false);
+    ImageUpdater imageUpdater = new ImageUpdater(project, false);
     imageUpdater.execute();
   }
 }

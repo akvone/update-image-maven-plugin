@@ -13,23 +13,22 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import org.apache.maven.plugin.logging.Log;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class DockerBuilder {
 
   private static final String TAG_DATE_TIME_PATTERN = "YYYYMMddHHmmSS";
 
   private String fullRepositoryUrl;
 
-  private final Log log;
   private final String projectName;
   private final String tag;
 
   private final DockerClient docker;
   private final PropertiesHolder propsHolder;
 
-  public DockerBuilder(PropertiesHolder propsHolder, Log log, String projectName) {
-    this.log = log;
+  public DockerBuilder(PropertiesHolder propsHolder, String projectName) {
     this.projectName = projectName;
     this.tag = LocalDateTime.now().format(DateTimeFormatter.ofPattern(TAG_DATE_TIME_PATTERN));
     this.propsHolder = propsHolder;
@@ -67,7 +66,7 @@ public class DockerBuilder {
     PushImageResultCallback pc = new PushImageResultCallback() {
       @Override
       public void onNext(PushResponseItem item) {
-        System.out.println(item);
+        log.info(item.toString());
         super.onNext(item);
       }
     };
@@ -88,7 +87,7 @@ public class DockerBuilder {
     BuildImageResultCallback callback = new BuildImageResultCallback() {
       @Override
       public void onNext(BuildResponseItem item) {
-        System.out.println(item);
+        log.info(item.toString());
         super.onNext(item);
       }
     };

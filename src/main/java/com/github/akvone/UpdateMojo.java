@@ -9,7 +9,7 @@ public class UpdateMojo extends AbstractMojoForRoot {
 
   @Override
   public void executeOnRoot() {
-    ImageUpdater imageUpdater = new ImageUpdater(getLog(), project, true);
+    ImageUpdater imageUpdater = new ImageUpdater(project, true);
     imageUpdater.execute();
   }
 

@@ -2,6 +2,7 @@ package com.github.akvone.properties;
 
 import java.util.HashMap;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.configuration2.CombinedConfiguration;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.MapConfiguration;
@@ -9,6 +10,7 @@ import org.apache.commons.configuration2.YAMLConfiguration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 
+@Slf4j
 public class PropertiesHolder {
 
   private final CombinedConfiguration configuration;
@@ -34,14 +36,14 @@ public class PropertiesHolder {
 
   private static Configuration createConfig(Configurations configurations, String yamlFile, boolean required) {
     try {
-      System.out.println("Try to read file " + yamlFile);
+      log.info("Read file {}", yamlFile);
       return configurations.fileBased(YAMLConfiguration.class, yamlFile);
     } catch (ConfigurationException e) {
-      System.err.println("Some problems with file " + yamlFile);
       if (required) {
+        log.warn("Some problems with file {}", yamlFile);
         throw new IllegalStateException("Can't create PropertiesHolder.", e);
       } else {
-        System.err.println("Try to proceed without it");
+        log.info("Some problems with optional config file {}. Try to proceed without it", yamlFile);
         return createEmptyConfiguration();
       }
     }

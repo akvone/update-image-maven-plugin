@@ -1,25 +1,24 @@
 package com.github.akvone.core;
 
-import com.github.akvone.services.DockerBuilder;
-import com.github.akvone.services.OpenShiftPatcher;
 import com.github.akvone.properties.OpenShiftProperties;
 import com.github.akvone.properties.PropertiesHolder;
+import com.github.akvone.services.DockerBuilder;
+import com.github.akvone.services.OpenShiftPatcher;
 import com.github.akvone.services.YamlPropsService;
 import java.io.IOException;
-import org.apache.maven.plugin.logging.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.maven.project.MavenProject;
 
+@Slf4j
 public class ImageUpdater {
 
   private final MavenProject project;
   private final String projectArtifactId;
-  private final Log log;
   private final boolean alsoMakeUpdateInCloud;
 
   private Runnable preExecuteCallback = () -> {};
 
-  public ImageUpdater(Log log, MavenProject project, boolean alsoMakeUpdateInCloud) {
-    this.log = log;
+  public ImageUpdater(MavenProject project, boolean alsoMakeUpdateInCloud) {
     this.project = project;
     this.projectArtifactId = project.getArtifactId();
     this.alsoMakeUpdateInCloud = alsoMakeUpdateInCloud;
@@ -41,21 +40,21 @@ public class ImageUpdater {
   }
 
   private void patchOpenshiftDeployment(PropertiesHolder propsHolder, String imageLocation) {
-    log.info("Start to patch openshift deployment with an image: " + imageLocation);
-    OpenShiftPatcher openShiftPatcher = new OpenShiftPatcher(log, generateOpenShiftProperties(propsHolder));
+    log.info("Start to patch openshift deployment with an image: {}", imageLocation);
+    OpenShiftPatcher openShiftPatcher = new OpenShiftPatcher(generateOpenShiftProperties(propsHolder));
     openShiftPatcher.patchOpenShiftDeployment(imageLocation);
   }
 
   private String uploadDockerImage(PropertiesHolder propsHolder) {
     log.info("Starting to connect to docker");
-    DockerBuilder dockerBuilder = new DockerBuilder(propsHolder, log, projectArtifactId);
+    DockerBuilder dockerBuilder = new DockerBuilder(propsHolder, projectArtifactId);
     log.info("Connected to docker");
 
     String imagePath = null;
     try {
       log.info("Starting building and pushing image");
       imagePath = dockerBuilder.run();
-      log.info("Push is successful. Image location: " + imagePath);
+      log.info("Push is successful. Image location: {}", imagePath);
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
     }
