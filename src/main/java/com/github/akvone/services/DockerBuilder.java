@@ -8,6 +8,7 @@ import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.command.BuildImageResultCallback;
 import com.github.dockerjava.core.command.PushImageResultCallback;
+import com.github.dockerjava.okhttp.OkHttpDockerCmdExecFactory;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -40,7 +41,9 @@ public class DockerBuilder {
         .withRegistryUsername(getDockerProp("username"))
         .withRegistryPassword(getDockerProp("authorization"))
         .build();
-    this.docker = DockerClientBuilder.getInstance(config).build();
+    this.docker = DockerClientBuilder.getInstance(config)
+        .withDockerCmdExecFactory(new OkHttpDockerCmdExecFactory())
+        .build();
   }
 
   private String getArtifactoryProp(String key) {

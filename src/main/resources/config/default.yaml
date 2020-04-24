@@ -1,5 +1,5 @@
 docker:
-  host: "***" # defined in default configs for OS
+  host: "***" # Already has defaults based on your OS
   username: "***"
   authorization: "***"
 artifactory:

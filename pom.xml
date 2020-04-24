@@ -41,7 +41,7 @@
     <maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
     <maven-project.version>2.2.1</maven-project.version>
     <!--For production-->
-    <docker-java.version>3.1.5</docker-java.version>
+    <docker-java.version>3.2.1</docker-java.version>
     <httpclient.version>4.5.9</httpclient.version>
     <guava.version>28.0-jre</guava.version>
     <commons-configuration2.version>2.5</commons-configuration2.version>
@@ -82,6 +82,11 @@
     <dependency>
       <groupId>com.github.docker-java</groupId>
       <artifactId>docker-java</artifactId>
+      <version>${docker-java.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.docker-java</groupId>
+      <artifactId>docker-java-transport-okhttp</artifactId>
       <version>${docker-java.version}</version>
     </dependency>
     <dependency><!--TODO: Remove as soon as docker java supports jdk11-->

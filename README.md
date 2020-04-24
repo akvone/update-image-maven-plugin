@@ -32,7 +32,7 @@ Add required properties
 [See default config](./src/main/resources/config/default.yaml)
 ```
 docker:
-  host: "tcp://127.0.0.1:2375" # or "unix:///var/run/docker.sock" for macOS
+  host: "***" # Already has defaults based on your OS 
   username: "***"
   authorization: "***"
 artifactory:
@@ -48,13 +48,13 @@ cloudProvider:
 Note that all these values (even "***") are plugin defaults.
 
 ## Prerequisites
-### Windows
-* Install docker desktop
-* Run docker and enable 'Docker without TLS' (`Docker` -> `Settings` -> `General` -> `Expose daemon on tcp://localhost:2375 without tls`)
-* Use "tcp://127.0.0.1:2375" in `docker.host` property
 
-### macOS
-* Use "unix:///var/run/docker.sock" in `docker.host` property
-
-### All platforms
+* Install Docker (Docker desktop for Windows) and run it
 * Add configuration file as described in *Configuration* section
+
+## Additionally
+
+You can additionally use tcp protocol. Use "tcp://127.0.0.1:2375" in `docker.host` property.
+
+After that you must enable 'Docker without TLS' (`Docker` -> `Settings` -> `General` -> `Expose daemon on tcp://localhost:2375 without tls`) 
+in Windows or something similar in macOS

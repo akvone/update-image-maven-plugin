@@ -14,7 +14,7 @@ public class YamlPropsServiceTest {
     initializePropertiesHolder("Windows");
 
     assertCommonDefaults();
-    assertDockerHost("tcp://127.0.0.1:2375");
+    assertDockerHost("npipe:////./pipe/docker_engine");
   }
 
   @Test
