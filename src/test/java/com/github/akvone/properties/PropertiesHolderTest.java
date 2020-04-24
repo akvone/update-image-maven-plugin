@@ -1,6 +1,6 @@
 package com.github.akvone.properties;
 
-import static com.github.akvone.properties.PropPair.of;
+import static com.github.akvone.properties.PropertyPair.of;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
@@ -11,7 +11,7 @@ public class PropertiesHolderTest {
 
   @Test
   public void complexTest() {
-    List<PropPair> configs = Arrays.asList(
+    List<PropertyPair> configs = Arrays.asList(
         of(fullFileName("user.yaml"), false),
         of("non existing file", false),
         of("config/OS/Linux-default.yaml", true),
@@ -25,7 +25,7 @@ public class PropertiesHolderTest {
 
   @Test
   public void priorityTest(){
-    List<PropPair> configs = Arrays.asList(
+    List<PropertyPair> configs = Arrays.asList(
         of(fullFileName("3.yaml"), true),
         of(fullFileName("2.yaml"), true),
         of(fullFileName("1.yaml"), true)
@@ -39,7 +39,7 @@ public class PropertiesHolderTest {
 
   @Test(expected = IllegalStateException.class)
   public void configNotExistsTest(){
-    List<PropPair> configs = Arrays.asList(
+    List<PropertyPair> configs = Arrays.asList(
         of(fullFileName("user.yaml"), false),
         of("non existing file", true)
     );

@@ -21,7 +21,7 @@ public class PropertiesHolder {
   /**
    * @param prioritizedListOfYamlLocations ordered from greatest to smallest priority
    */
-  public static PropertiesHolder create(List<PropPair> prioritizedListOfYamlLocations) {
+  public static PropertiesHolder create(List<PropertyPair> prioritizedListOfYamlLocations) {
     Configurations confFactory = new Configurations();
     CombinedConfiguration combinedConfig = new CombinedConfiguration();
 

@@ -1,8 +1,8 @@
 package com.github.akvone.services;
 
-import static com.github.akvone.properties.PropPair.of;
+import static com.github.akvone.properties.PropertyPair.of;
 
-import com.github.akvone.properties.PropPair;
+import com.github.akvone.properties.PropertyPair;
 import com.github.akvone.properties.PropertiesHolder;
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +16,7 @@ public class YamlPropsService {
   private static final String DEFAULT_FILE_LOCATION = "config/default.yaml";
 
   public PropertiesHolder createPropertiesHolder() {
-    List<PropPair> prioritizedListOfYamlLocations = Arrays.asList(
+    List<PropertyPair> prioritizedListOfYamlLocations = Arrays.asList(
         of(USER_FILE_LOCATION_SPECIFIC, false),
         of(USER_FILE_LOCATION_ROOT, false),
         of(buildOSDefaultYamlFileLocation(), true),
