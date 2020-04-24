@@ -1,2 +1,4 @@
+artifactory:
+  url: "localhost:8080"
 cloudProvider:
   type: "amazon"

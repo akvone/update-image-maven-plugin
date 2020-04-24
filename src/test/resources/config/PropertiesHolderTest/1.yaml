@@ -1,0 +1,4 @@
+build:
+  package: org
+  os: windows
+  version: 1

@@ -1,6 +1,7 @@
 package com.github.akvone.properties;
 
 import java.util.HashMap;
+import java.util.List;
 import org.apache.commons.configuration2.CombinedConfiguration;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.MapConfiguration;
@@ -17,20 +18,18 @@ public class PropertiesHolder {
     configuration.setThrowExceptionOnMissing(true);
   }
 
-  public static PropertiesHolder create(String defaultYamlFile, String osDefaultYamlFile, String userYamlFileRoot, String userYamlFileSpecific) {
-    Configurations configurations = new Configurations();
-    Configuration defaultConfig = createConfig(configurations, defaultYamlFile, true);
-    Configuration defaultOSConfig = createConfig(configurations, osDefaultYamlFile, true);
-    Configuration userConfigRoot = createConfig(configurations, userYamlFileRoot, false);
-    Configuration userConfigSpecific = createConfig(configurations, userYamlFileSpecific, false);
-    CombinedConfiguration config = new CombinedConfiguration();
-    // Order from most to least preferable
-    config.addConfiguration(userConfigRoot);
-    config.addConfiguration(userConfigSpecific);
-    config.addConfiguration(defaultOSConfig);
-    config.addConfiguration(defaultConfig);
+  /**
+   * @param prioritizedListOfYamlLocations ordered from greatest to smallest priority
+   */
+  public static PropertiesHolder create(List<PropPair> prioritizedListOfYamlLocations) {
+    Configurations confFactory = new Configurations();
+    CombinedConfiguration combinedConfig = new CombinedConfiguration();
 
-    return new PropertiesHolder(config);
+    prioritizedListOfYamlLocations.stream()
+        .map(propPair -> createConfig(confFactory, propPair.getYamlFile(), propPair.isRequired()))
+        .forEach(combinedConfig::addConfiguration);
+
+    return new PropertiesHolder(combinedConfig);
   }
 
   private static Configuration createConfig(Configurations configurations, String yamlFile, boolean required) {
@@ -43,9 +42,13 @@ public class PropertiesHolder {
         throw new IllegalStateException("Can't create PropertiesHolder.", e);
       } else {
         System.err.println("Try to proceed without it");
-        return new MapConfiguration(new HashMap<>()); // TODO: create empty configuration
+        return createEmptyConfiguration();
       }
     }
+  }
+
+  private static MapConfiguration createEmptyConfiguration() {
+    return new MapConfiguration(new HashMap<>());
   }
 
   public String get(String prefix, String key) {

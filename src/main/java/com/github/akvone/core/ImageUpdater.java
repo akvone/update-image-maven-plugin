@@ -4,16 +4,12 @@ import com.github.akvone.services.DockerBuilder;
 import com.github.akvone.services.OpenShiftPatcher;
 import com.github.akvone.properties.OpenShiftProperties;
 import com.github.akvone.properties.PropertiesHolder;
+import com.github.akvone.services.YamlPropsService;
 import java.io.IOException;
-import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.project.MavenProject;
 
 public class ImageUpdater {
-
-  private static final String DEFAULT_YAML_FILE_LOCATION = "config/default.yaml";
-  private static final String USER_YAML_FILE_LOCATION_ROOT = "../config.yaml";
-  private static final String USER_YAML_FILE_LOCATION_SPECIFIC = "gitignore/config.yaml";
 
   private final MavenProject project;
   private final String projectArtifactId;
@@ -35,28 +31,13 @@ public class ImageUpdater {
 
   public void execute() {
     preExecuteCallback.run();
-    PropertiesHolder propsHolder = PropertiesHolder.create(
-        DEFAULT_YAML_FILE_LOCATION,
-        buildOSDefaultYamlFileLocation(),
-        USER_YAML_FILE_LOCATION_ROOT,
-        USER_YAML_FILE_LOCATION_SPECIFIC);
+    PropertiesHolder propsHolder = new YamlPropsService().createPropertiesHolder();
 
     String imageLocation = uploadDockerImage(propsHolder);
 
     if (alsoMakeUpdateInCloud) {
       patchOpenshiftDeployment(propsHolder, imageLocation);
     }
-  }
-
-  private String buildOSDefaultYamlFileLocation() {
-    String os;
-    if (SystemUtils.IS_OS_WINDOWS){
-      os = "Windows";
-    } else {
-      os = "Linux";
-    }
-
-    return String.format("config/OS/%s-default.yaml", os);
   }
 
   private void patchOpenshiftDeployment(PropertiesHolder propsHolder, String imageLocation) {
