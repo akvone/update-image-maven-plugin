@@ -17,15 +17,17 @@ public class PropertiesHolder {
     configuration.setThrowExceptionOnMissing(true);
   }
 
-  public static PropertiesHolder create(String defaultYamlFile, String userYamlFileRoot, String userYamlFileSpecific) {
+  public static PropertiesHolder create(String defaultYamlFile, String osDefaultYamlFile, String userYamlFileRoot, String userYamlFileSpecific) {
     Configurations configurations = new Configurations();
     Configuration defaultConfig = createConfig(configurations, defaultYamlFile, true);
+    Configuration defaultOSConfig = createConfig(configurations, osDefaultYamlFile, true);
     Configuration userConfigRoot = createConfig(configurations, userYamlFileRoot, false);
     Configuration userConfigSpecific = createConfig(configurations, userYamlFileSpecific, false);
     CombinedConfiguration config = new CombinedConfiguration();
     // Order from most to least preferable
     config.addConfiguration(userConfigRoot);
     config.addConfiguration(userConfigSpecific);
+    config.addConfiguration(defaultOSConfig);
     config.addConfiguration(defaultConfig);
 
     return new PropertiesHolder(config);

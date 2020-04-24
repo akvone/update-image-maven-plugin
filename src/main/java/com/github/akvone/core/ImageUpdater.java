@@ -5,6 +5,7 @@ import com.github.akvone.services.OpenShiftPatcher;
 import com.github.akvone.properties.OpenShiftProperties;
 import com.github.akvone.properties.PropertiesHolder;
 import java.io.IOException;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.project.MavenProject;
 
@@ -36,6 +37,7 @@ public class ImageUpdater {
     preExecuteCallback.run();
     PropertiesHolder propsHolder = PropertiesHolder.create(
         DEFAULT_YAML_FILE_LOCATION,
+        buildOSDefaultYamlFileLocation(),
         USER_YAML_FILE_LOCATION_ROOT,
         USER_YAML_FILE_LOCATION_SPECIFIC);
 
@@ -44,6 +46,17 @@ public class ImageUpdater {
     if (alsoMakeUpdateInCloud) {
       patchOpenshiftDeployment(propsHolder, imageLocation);
     }
+  }
+
+  private String buildOSDefaultYamlFileLocation() {
+    String os;
+    if (SystemUtils.IS_OS_WINDOWS){
+      os = "Windows";
+    } else {
+      os = "Linux";
+    }
+
+    return String.format("config/OS/%s-default.yaml", os);
   }
 
   private void patchOpenshiftDeployment(PropertiesHolder propsHolder, String imageLocation) {
