@@ -23,14 +23,12 @@ public class DockerBuilder {
   private String fullRepositoryUrl;
 
   private final String projectName;
-  private final String tag;
 
   private final DockerClient docker;
   private final PropertiesHolder propsHolder;
 
   public DockerBuilder(PropertiesHolder propsHolder, String projectName) {
     this.projectName = projectName;
-    this.tag = LocalDateTime.now().format(DateTimeFormatter.ofPattern(TAG_DATE_TIME_PATTERN));
     this.propsHolder = propsHolder;
     fullRepositoryUrl = getArtifactoryProp("url") + getArtifactoryProp("repository");
 
@@ -55,14 +53,14 @@ public class DockerBuilder {
 
   public String run() throws IOException, InterruptedException {
     String imageId = buildImage();
-    tagImage(imageId);
-    String imagePath = pushImage();
+    String tag = tagImage(imageId);
+    String imagePath = pushImage(tag);
 
     docker.close();
     return imagePath;
   }
 
-  private String pushImage() throws InterruptedException {
+  private String pushImage(String tag) throws InterruptedException {
     PushImageResultCallback pc = new PushImageResultCallback() {
       @Override
       public void onNext(PushResponseItem item) {
@@ -79,8 +77,11 @@ public class DockerBuilder {
     return imagePath + ":" + tag;
   }
 
-  private void tagImage(String imageId) {
+  private String tagImage(String imageId) {
+    String tag = LocalDateTime.now().format(DateTimeFormatter.ofPattern(TAG_DATE_TIME_PATTERN));
     docker.tagImageCmd(imageId, fullRepositoryUrl + projectName, tag).exec();
+
+    return tag;
   }
 
   private String buildImage() {
