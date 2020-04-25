@@ -1,9 +1,9 @@
 package com.github.akvone.services;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.akvone.properties.PropertiesHolder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class YamlPropsServiceTest {
 

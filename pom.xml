@@ -51,7 +51,7 @@
     <commons-beanutils.version>1.9.4</commons-beanutils.version>
     <snakeyaml.version>1.24</snakeyaml.version>
     <!--For tests-->
-    <junit.version>4.11</junit.version>
+    <junit-jupiter-engine.version>5.6.2</junit-jupiter-engine.version>
     <!--Plugins-->
     <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
     <maven-plugin-plugin.version>3.6.0</maven-plugin-plugin.version>
@@ -138,13 +138,11 @@
       <artifactId>snakeyaml</artifactId>
       <version>${snakeyaml.version}</version>
     </dependency>
-
-
     <!--For tests-->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit-jupiter-engine.version}</version>
       <scope>test</scope>
     </dependency>
 
