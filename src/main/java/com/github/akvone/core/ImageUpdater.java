@@ -35,12 +35,12 @@ public class ImageUpdater {
     String imageLocation = uploadDockerImage(propsHolder);
 
     if (alsoMakeUpdateInCloud) {
-      patchOpenshiftDeployment(propsHolder, imageLocation);
+      patchOpenShiftDeployment(propsHolder, imageLocation);
     }
   }
 
-  private void patchOpenshiftDeployment(PropertiesHolder propsHolder, String imageLocation) {
-    log.info("Start to patch openshift deployment with an image: {}", imageLocation);
+  private void patchOpenShiftDeployment(PropertiesHolder propsHolder, String imageLocation) {
+    log.info("Start to patch OpenShift deployment with an image: {}", imageLocation);
     OpenShiftPatcher openShiftPatcher = new OpenShiftPatcher(generateOpenShiftProperties(propsHolder));
     openShiftPatcher.patchOpenShiftDeployment(imageLocation);
   }

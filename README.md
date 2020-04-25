@@ -1,6 +1,17 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.akvone/update-image-maven-plugin)](https://search.maven.org/artifact/com.github.akvone/update-image-maven-plugin)
 
 # Update image Maven plugin
+## What it is used for?
+
+It is used to automate the next pipeline:
+
+`src` → `.jar` → docker image → artifactory → OpenShift
+
+1. run `maven package` and build spring boot app (or whatever you need)
+2. build docker image and push it into a repository
+3. update docker image in the cloud (currently in OpenShift)
+
+Actually, the plugin itself automates steps 2 and 3.
 
 ## How to use 
 ### With maven
@@ -39,10 +50,10 @@ artifactory:
   url: "!!!"
   repository: "!!!"
 cloudProvider:
-  type: "openshift"
+  type: "openshift" # currently, OpenShift is supported only
   url: "***"
   namespace: "***"
-  authorizationToken: "***" # get it from openshift (Bearer token)
+  authorizationToken: "***" # get it from OpenShift (Bearer token)
 ```
 
 Note that properties with "!!!" are required and "***" are optional.

@@ -6,7 +6,7 @@ artifactory:
   url: "!!!"
   repository: "!!!"
 cloudProvider:
-  type: "openshift"
+  type: "openshift" # currently, OpenShift is supported only
   url: "***"
   namespace: "***"
-  authorizationToken: "***" # get it from openshift (Bearer token)
+  authorizationToken: "***" # get it from OpenShift (Bearer token)
