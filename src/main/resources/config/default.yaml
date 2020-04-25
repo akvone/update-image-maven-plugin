@@ -1,10 +1,10 @@
 docker:
   host: "***" # Already has defaults based on your OS
-  username: "***"
-  authorization: "***"
+  username: "!!!"
+  authorization: "!!!"
 artifactory:
-  url: "***"
-  repository: "***"
+  url: "!!!"
+  repository: "!!!"
 cloudProvider:
   type: "openshift"
   url: "***"

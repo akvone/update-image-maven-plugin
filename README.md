@@ -32,12 +32,12 @@ Add required properties
 [See default config](./src/main/resources/config/default.yaml)
 ```
 docker:
-  host: "***" # Already has defaults based on your OS 
-  username: "***"
-  authorization: "***"
+  host: "***" # Already has defaults based on your OS
+  username: "!!!"
+  authorization: "!!!"
 artifactory:
-  url: "***"
-  repository: "***"
+  url: "!!!"
+  repository: "!!!"
 cloudProvider:
   type: "openshift"
   url: "***"
@@ -45,7 +45,7 @@ cloudProvider:
   authorizationToken: "***" # get it from openshift (Bearer token)
 ```
 
-Note that all these values (even "***") are plugin defaults.
+Note that properties with "!!!" are required and "***" are optional.
 
 ## Prerequisites
 
