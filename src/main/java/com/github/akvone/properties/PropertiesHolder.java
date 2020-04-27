@@ -20,8 +20,10 @@ public class PropertiesHolder {
     configuration.setThrowExceptionOnMissing(true);
   }
 
+
   /**
    * @param prioritizedListOfYamlLocations ordered from greatest to smallest priority
+   * @return Fully constructed {@link PropertiesHolder}
    */
   public static PropertiesHolder create(List<PropertyPair> prioritizedListOfYamlLocations) {
     Configurations confFactory = new Configurations();
