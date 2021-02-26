@@ -1,11 +1,11 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.akvone/update-image-maven-plugin)](https://search.maven.org/artifact/com.github.akvone/update-image-maven-plugin)
 
 # Update image Maven plugin
-## What it is used for?
+## What is it used for?
 
 It is used to automate the next pipeline:
 
-`src` → `.jar` → docker image → artifactory → OpenShift
+`src` → `.jar` → `docker image` → artifactory → OpenShift
 
 1. run `maven package` and build spring boot app (or whatever you need)
 2. build docker image and push it into a repository
@@ -26,10 +26,10 @@ Actually, the plugin itself automates steps 2 and 3.
 
 ### With Intellij IDEA
 1. Add Configuration
-2. Create Maven Run Configuration:
+2. Create Maven Run Configuration
 3. Command line:
   `-N com.github.akvone:update-image-maven-plugin:update`
-4. Before launch 
+4. Before launch: 
   `clean package -DskipTests`
   
 ![EXAMPLE](./documentation/images/How%20to.%20IntelliJ%20IDEA.png) 
@@ -68,4 +68,4 @@ Note that properties with "!!!" are required and "***" are optional.
 You can additionally use tcp protocol. Use "tcp://127.0.0.1:2375" in `docker.host` property.
 
 After that you must enable 'Docker without TLS' (`Docker` -> `Settings` -> `General` -> `Expose daemon on tcp://localhost:2375 without tls`) 
-in Windows or something similar in macOS
+in Windows or something similar in macOS.
