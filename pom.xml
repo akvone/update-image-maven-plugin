@@ -45,7 +45,7 @@
     <slf4j.version>1.7.30</slf4j.version>
     <!--For production-->
     <docker-java.version>3.2.1</docker-java.version>
-    <httpclient.version>4.5.9</httpclient.version>
+    <httpclient.version>4.5.13</httpclient.version>
     <guava.version>30.0-jre</guava.version>
     <commons-configuration2.version>2.7</commons-configuration2.version>
     <commons-beanutils.version>1.9.4</commons-beanutils.version>
