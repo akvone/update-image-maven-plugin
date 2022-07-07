@@ -47,7 +47,7 @@
     <docker-java.version>3.2.1</docker-java.version>
     <httpclient.version>4.5.9</httpclient.version>
     <guava.version>30.0-jre</guava.version>
-    <commons-configuration2.version>2.7</commons-configuration2.version>
+    <commons-configuration2.version>2.8.0</commons-configuration2.version>
     <commons-beanutils.version>1.9.4</commons-beanutils.version>
     <snakeyaml.version>1.24</snakeyaml.version>
     <!--For tests-->
