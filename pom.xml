@@ -49,7 +49,7 @@
     <guava.version>30.0-jre</guava.version>
     <commons-configuration2.version>2.7</commons-configuration2.version>
     <commons-beanutils.version>1.9.4</commons-beanutils.version>
-    <snakeyaml.version>1.24</snakeyaml.version>
+    <snakeyaml.version>1.31</snakeyaml.version>
     <!--For tests-->
     <junit-jupiter-engine.version>5.6.2</junit-jupiter-engine.version>
     <!--Plugins-->
